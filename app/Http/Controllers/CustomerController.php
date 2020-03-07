@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomerFormRequest;
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CustomerController extends Controller
@@ -14,9 +13,12 @@ class CustomerController extends Controller
         return $this->response(Customer::all(), Response::HTTP_OK);
     }
 
-    public function create(CustomerFormRequest $request)
+    public function store(CustomerRequest $request)
     {
-        dd($request->all());
+        return $this->response(Customer::query()->create($request->validated()), 200,
+            trans('messages.user_created')
+        );
+
     }
 
     public function update()
@@ -24,8 +26,8 @@ class CustomerController extends Controller
 
     }
 
-    public function destroy()
+    public function show($id)
     {
-
+        return $this->response(Customer::query()->findOrFail($id), Response::HTTP_OK);
     }
 }
