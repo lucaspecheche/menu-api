@@ -18,7 +18,7 @@ class CustomerController extends Controller
         $customer = Customer::query()->create($request->validated());
 
         return $this->response($customer, Response::HTTP_CREATED,
-            trans('messages.customer_created')
+            trans('messages.customer.created')
         );
     }
 
@@ -28,7 +28,7 @@ class CustomerController extends Controller
         $customer->update($request->validated());
 
         return $this->response($customer, Response::HTTP_OK,
-            trans('messages.customer_updated')
+            trans('messages.customer.updated')
         );
     }
 
@@ -42,7 +42,7 @@ class CustomerController extends Controller
         Customer::findOrFail($id)->delete();
 
         return $this->response([], Response::HTTP_OK,
-            trans('messages.customer_deleted')
+            trans('messages.customer.deleted')
         );
 
     }

@@ -10,6 +10,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map(): void
     {
         $this->mapCustomerRoutes();
+        $this->mapOrderRoutes();
     }
 
     protected function mapCustomerRoutes(): void
@@ -17,6 +18,14 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('customers')
             ->middleware('api')
             //->namespace($this->namespace)
-            ->group(base_path('routes/customer.php'));
+            ->group(base_path('routes/customers.php'));
+    }
+
+    private function mapOrderRoutes()
+    {
+        Route::prefix('orders')
+            ->middleware('api')
+            //->namespace($this->namespace)
+            ->group(base_path('routes/orders.php'));
     }
 }
