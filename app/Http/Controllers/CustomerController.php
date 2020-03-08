@@ -15,19 +15,35 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        return $this->response(Customer::query()->create($request->validated()), 200,
-            trans('messages.user_created')
-        );
+        $customer = Customer::query()->create($request->validated());
 
+        return $this->response($customer, Response::HTTP_CREATED,
+            trans('messages.customer_created')
+        );
     }
 
-    public function update()
+    public function update($id, CustomerRequest $request)
     {
+        $customer = Customer::findOrFail($id);
+        $customer->update($request->validated());
 
+        return $this->response($customer, Response::HTTP_OK,
+            trans('messages.customer_updated')
+        );
     }
 
     public function show($id)
     {
-        return $this->response(Customer::query()->findOrFail($id), Response::HTTP_OK);
+        return $this->response(Customer::findOrFail($id), Response::HTTP_OK);
+    }
+
+    public function destroy($id)
+    {
+        Customer::findOrFail($id)->delete();
+
+        return $this->response([], Response::HTTP_OK,
+            trans('messages.customer_deleted')
+        );
+
     }
 }

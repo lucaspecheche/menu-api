@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\CustomerExceptions;
+
 class Customer extends BaseModel
 {
     protected $fillable = [
@@ -14,4 +16,15 @@ class Customer extends BaseModel
         'updatedAt',
         'deletedAt'
     ];
+
+    public static function findOrFail($id): Customer
+    {
+        $customer = self::find($id);
+
+        if($customer === null) {
+            throw CustomerExceptions::notFound();
+        }
+
+        return $customer;
+    }
 }

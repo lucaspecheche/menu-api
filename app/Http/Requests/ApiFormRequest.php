@@ -16,7 +16,7 @@ abstract class ApiFormRequest extends FormRequest
     {
         $error =  [
             'shortMessage'       => 'invalidData',
-            'message'            => trans('validation.invalidData'),
+            'message'            => $validator->errors()->first() ?? trans('validation.invalidData'),
             'description'        => [],
         ];
 
