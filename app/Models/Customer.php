@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Exceptions\CustomerExceptions;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,16 +28,5 @@ class Customer extends BaseModel
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'customerId');
-    }
-
-    public static function findOrFail($id): Customer
-    {
-        $customer = self::find($id);
-
-        if($customer === null) {
-            throw CustomerExceptions::notFound();
-        }
-
-        return $customer;
     }
 }

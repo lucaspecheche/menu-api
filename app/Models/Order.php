@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,7 +23,13 @@ class Order extends BaseModel
     protected $fillable = [
         'value',
         'customerId',
-        'status'
+        'status',
+        'createdAt'
+    ];
+
+    protected $hidden = [
+        'deletedAt',
+        'updatedAt'
     ];
 
     public function customer(): BelongsTo
@@ -30,7 +37,7 @@ class Order extends BaseModel
         return $this->belongsTo(Customer::class, 'customerId', 'id')->withTrashed();
     }
 
-    public static function withCustomer()
+    public static function withCustomer(): LengthAwarePaginator
     {
         return self::query()->with('customer')->paginate(10);
     }

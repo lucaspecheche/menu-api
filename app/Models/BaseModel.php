@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\ApiExceptions;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -21,5 +22,14 @@ class BaseModel extends Model
     protected function serializeDate(DateTimeInterface $date): string
     {
         return Carbon::instance($date)->format('Y-m-d H:i');
+    }
+
+    public static function findOrFail($id): Model
+    {
+        $model = self::find($id);
+
+        throw_unless($model, ApiExceptions::modelNotFound());
+
+        return $model;
     }
 }
