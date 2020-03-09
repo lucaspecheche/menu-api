@@ -19,7 +19,7 @@ class BaseModel extends Model
         self::DELETED_AT
     ];
 
-    protected function serializeDate(DateTimeInterface $date): string
+    protected function serializeDateApi(DateTimeInterface $date): string
     {
         return Carbon::instance($date)->format('Y-m-d H:i');
     }

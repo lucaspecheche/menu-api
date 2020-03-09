@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
+Artisan::command('tt', function () {
+    dd(factory(\App\Models\Order::class)->make());
 })->describe('Display an inspiring quote');

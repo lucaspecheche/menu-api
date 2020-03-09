@@ -11,5 +11,6 @@ $factory->define(Order::class, static function (Faker $faker) {
     return [
         'status' => Order::STATUS_AVAILABLE[array_rand(Order::STATUS_AVAILABLE)],
         'value'  => $faker->randomFloat(2, 1, 1000),
+        'createdAt' => $faker->dateTimeBetween('-5 months', 'now')
     ];
 });
