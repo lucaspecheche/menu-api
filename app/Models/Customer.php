@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +19,8 @@ class Customer extends BaseModel
     protected $fillable = [
         'firstName',
         'lastName',
-        'email'
+        'email',
+        'createdAt'
     ];
 
     protected $hidden = [
@@ -28,5 +31,23 @@ class Customer extends BaseModel
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'customerId');
+    }
+
+    public static function filter(array $filters): Builder
+    {
+        $query = self::query();
+
+        foreach ($filters as $key => $value) {
+            switch ($key) {
+                case 'startDate':
+                    $query->whereDate('createdAt', '>=', Carbon::parse($value)->startOfDay());
+                    break;
+                case 'endDate':
+                    $query->whereDate('createdAt', '<=', Carbon::parse($value)->endOfDay());
+                    break;
+            }
+        }
+
+        return $query;
     }
 }

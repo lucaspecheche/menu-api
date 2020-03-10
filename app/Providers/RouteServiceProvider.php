@@ -18,7 +18,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('customers')
             ->middleware('api')
-            //->namespace($this->namespace)
             ->group(base_path('routes/customers.php'));
     }
 
@@ -26,15 +25,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('orders')
             ->middleware('api')
-            //->namespace($this->namespace)
             ->group(base_path('routes/orders.php'));
     }
 
     private function mapReportRoutes(): void
     {
-        Route::prefix('report')
+        Route::prefix('reports')
             ->middleware('api')
-            //->namespace($this->namespace)
             ->group(base_path('routes/reports.php'));
     }
 }

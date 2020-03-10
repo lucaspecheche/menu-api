@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        Order::query()->find($id)->delete();
+        Order::query()->findOrFail($id)->delete();
         return $this->response([], Response::HTTP_OK, trans('messages.order.deleted'));
     }
 

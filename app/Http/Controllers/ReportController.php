@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use Illuminate\Support\Collection;
-use function foo\func;
+use App\Http\Resources\OrdersByDay;
+use App\Http\Resources\OrdersByStatus;
+use App\Http\Resources\TotalReport;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function salesPerDay()
+    public function ordersByDay()
     {
-        $data = [];
+        return $this->response(OrdersByDay::get());
+    }
 
-        $orders = Order::query()->orderBy('createdAt')->get();
+    public function ordersByStatus()
+    {
+        return $this->response(OrdersByStatus::get());
+    }
 
-        foreach ($orders as $order) {
-            $date = $order->createdAt->format('Y-m-d');
-
-            isset($data[$date])
-                ? ++$data[$date]
-                : ($data[$date] = 1);
-
-        }
-
-        return [
-            'categories' => array_keys($data),
-            'data' => array_values($data)
-
-        ];
+    public function total(Request $request)
+    {
+        return $this->response(TotalReport::get($request->all()));
     }
 }

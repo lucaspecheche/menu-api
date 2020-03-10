@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -43,6 +44,29 @@ class Order extends BaseModel
 
     public static function withCustomer(): LengthAwarePaginator
     {
-        return self::query()->with('customer')->paginate(10);
+        return self::query()
+            ->with('customer')
+            ->orderByDesc('createdAt')
+            ->paginate(10);
+    }
+
+    public static function filter(array $filters): Builder
+    {
+        $query = self::query();
+
+        foreach ($filters as $key => $value) {
+            switch ($key) {
+                case 'startDate':
+                    $query->whereDate('createdAt', '>=',  Carbon::parse($value)->startOfDay());
+                    break;
+                case 'endDate':
+                    $query->whereDate('createdAt', '<=',  Carbon::parse($value)->endOfDay());
+                    break;
+                case 'status':
+                    $query->where($key, '=', $value);
+            }
+        }
+
+        return $query;
     }
 }
