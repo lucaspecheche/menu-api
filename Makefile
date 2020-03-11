@@ -1,0 +1,2 @@
+start:
+	@bash init.bash

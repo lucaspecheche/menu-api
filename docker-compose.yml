@@ -4,7 +4,7 @@ services:
     build:
       context: docker/php
       dockerfile: Dockerfile
-    container_name: php
+    container_name: menu-php
     entrypoint:
       - php-fpm
     volumes:
@@ -14,7 +14,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: menu-nginx
     depends_on:
       - php
     volumes:
