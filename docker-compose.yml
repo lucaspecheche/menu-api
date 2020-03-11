@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  php:
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    container_name: php
+    entrypoint:
+      - php-fpm
+    volumes:
+      - ./:/menu-api
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    depends_on:
+      - php
+    volumes:
+      - ./:/menu-api
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    ports:
+      - "8003:8003"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
