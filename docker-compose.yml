@@ -21,7 +21,7 @@ services:
       - ./:/menu-api
       - ./docker/nginx/:/etc/nginx/conf.d/
     ports:
-      - "8003:8003"
+      - "8000:8000"
     networks:
       - app-network
 
