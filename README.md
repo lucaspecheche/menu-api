@@ -32,6 +32,7 @@ API será iniciada na porta `8000`
 
 #### Backlog:
 - Adicionar resources de produtos;
+- Criar filtros para clientes e pedidos;
 - Ajustar barra de pesquisa global;
 - Confirmar e-mail;
 - Pedir endereço do cliente e fazer integração para consulta de CEP;
