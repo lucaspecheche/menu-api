@@ -32,13 +32,13 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        Order::query()->findOrFail($id)->delete();
+        Order::findOrFail($id)->delete();
         return $this->response([], Response::HTTP_OK, trans('messages.order.deleted'));
     }
 
     public function show($id)
     {
-        $order = Order::query()->findOrFail($id);
+        $order = Order::findOrFail($id);
         return $this->response($order, Response::HTTP_OK);
     }
 }
