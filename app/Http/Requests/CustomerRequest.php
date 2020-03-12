@@ -31,7 +31,8 @@ class CustomerRequest extends ApiFormRequest
         return [
             'email'     => 'required|email|unique:customers,email',
             'firstName' => 'required|string',
-            'lastName'  => 'required|string'
+            'lastName'  => 'required|string',
+            'createdAt' => 'sometimes|date'
         ];
     }
 
@@ -40,7 +41,8 @@ class CustomerRequest extends ApiFormRequest
         return [
             'email'     => 'sometimes|email|unique:customers,email',
             'firstName' => 'sometimes|string',
-            'lastName'  => 'sometimes|string'
+            'lastName'  => 'sometimes|string',
+            'createdAt' => 'sometimes|date'
         ];
     }
 }
