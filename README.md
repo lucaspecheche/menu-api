@@ -22,28 +22,5 @@ Se você utiliza Linux, hoje sua vida será um pouco melhor. 👊
 
 Agora vamos lá ver? [Seguir para o App](http://localhost:8000)
 
-#### Retornos Padronizados:
-```
-//200
-{
-  "message": "Success",
-  "data": [
-    ....
-   ]
-}
-```
-
-```
-{
-  "shortMessage": "invalidData",
-  "message": "O campo email é obrigatório.",
-  "description": [
-    "O campo email é obrigatório.",
-    "O campo first name é obrigatório.",
-    "O campo last name é obrigatório."
-  ]
-}
-```
-
 #### Executar Testes:
 - `docker exec -ti menu-php bash -c "composer tests"`
