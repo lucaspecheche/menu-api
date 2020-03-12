@@ -38,7 +38,7 @@ API será iniciada na porta `8000`
 - Pedir endereço do cliente e fazer integração para consulta de CEP;
 - Apresentar erros em Modal com mais informações;
 - Criar CI com Git Actions;
-- Migrar para Mysql (izi)
+- Migrar para Mysql (gg)
 - Criar coleções utilizando MongoDB para os Pedidos;
 - Criar relatórios por produtos mais vendidos.
 - Criar relatórios de cliente/pedidos.
