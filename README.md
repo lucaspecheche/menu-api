@@ -29,3 +29,16 @@ API será iniciada na porta `8000`
 
 #### Executar Testes:
 - `docker exec -ti menu-php bash -c "composer tests"`
+
+#### Backlog:
+- Adicionar resources de produtos;
+- Ajustar barra de pesquisa global;
+- Confirmar e-mail;
+- Pedir endereço do cliente e fazer integração para consulta de CEP;
+- Apresentar erros em Modal com mais informações;
+- Criar CI com Git Actions;
+- Migrar para Mysql (izi)
+- Criar coleções utilizando MongoDB para os Pedidos;
+- Criar relatórios por produtos mais vendidos.
+- Criar relatórios de cliente/pedidos.
+
