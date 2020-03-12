@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Http\Resources\OrdersByDay;
 use App\Http\Resources\OrdersByStatus;
 use App\Http\Resources\TotalReport;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function ordersByDay()
+    public function ordersByDay(ReportRequest $request)
     {
-        return $this->response(OrdersByDay::get());
+        return $this->response(OrdersByDay::get($request->validated()));
     }
 
-    public function ordersByStatus()
+    public function ordersByStatus(ReportRequest $request)
     {
-        return $this->response(OrdersByStatus::get());
+        return $this->response(OrdersByStatus::get($request->validated()));
     }
 
-    public function total(Request $request)
+    public function total(ReportRequest $request)
     {
-        return $this->response(TotalReport::get($request->all()));
+        return $this->response(TotalReport::get($request->validated()));
     }
 }

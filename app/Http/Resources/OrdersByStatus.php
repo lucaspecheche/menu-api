@@ -6,11 +6,11 @@ use App\Models\Order;
 
 class OrdersByStatus
 {
-    public static function get(): array
+    public static function get(array $filters = []): array
     {
         $data = [];
 
-        $orders = Order::query()->orderBy('status')->get();
+        $orders = Order::filter($filters)->orderBy('status')->get();
 
         foreach ($orders as $order) {
             $status = trans("status.$order->status");

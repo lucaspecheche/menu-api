@@ -7,6 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 
 /**
  * @property Carbon createdAt
@@ -63,7 +64,7 @@ class Order extends BaseModel
                     $query->whereDate('createdAt', '<=',  Carbon::parse($value)->endOfDay());
                     break;
                 case 'status':
-                    $query->where($key, '=', $value);
+                    $query->whereIn($key, Arr::wrap($value));
             }
         }
 

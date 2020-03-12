@@ -6,11 +6,11 @@ use App\Models\Order;
 
 class OrdersByDay
 {
-    public static function get(): array
+    public static function get(array $filters = []): array
     {
         $data = [];
 
-        $orders = Order::query()->orderBy('createdAt')->get();
+        $orders = Order::filter($filters)->orderBy('createdAt')->get();
 
         foreach ($orders as $order) {
             $date = $order->createdAt->format('Y-m-d');
